@@ -1,0 +1,29 @@
+{
+  "name": "osm-meta-util",
+  "version": "0.0.1",
+  "description": "A tool to download OSM metadata",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/developmentseed/osm-meta-util.git"
+  },
+  "keywords": [
+    "osm",
+    "metadata",
+    "changesets"
+  ],
+  "author": "Development Seed",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/developmentseed/osm-meta-util/issues"
+  },
+  "homepage": "https://github.com/developmentseed/osm-meta-util",
+  "dependencies": {
+    "JSONStream": "^0.10.0",
+    "node-expat": "^2.3.5",
+    "request": "^2.53.0"
+  }
+}
