@@ -12,7 +12,7 @@ Clone the repo or download it as a zip. `npm` install the dependencies.
 
 Require `osmMetaUtil.js` in your node app. 
 
-```
+```javascript
 var MetaUtil = require('./osmMetaUtil.js');
 ```
 
@@ -24,7 +24,7 @@ There are a few ways of using the utility:
 
 The files are named in numerical order since February 28th, 2012. They're incremented every minute. You need the file name related to the start and end date. For example, `001181708` refers to [http://planet.osm.org/replication/changesets/001/181/708.osm.gz](http://planet.osm.org/replication/changesets/001/181/708.osm.gz), created on `2015-02-10 20:56`.
 
-```
+```javascript
 var MetaUtil = require('./osmMetaUtil.js');
 var through = require('through')
 // Getting historical metadata, specify a start & end
@@ -37,14 +37,14 @@ var meta = MetaUtil({
 
 ### 2. Continuously 
 
-```
+```javascript
 // Live Mode! Updates every minute
 var meta = MetaUtil().pipe(process.stdout)
 ```
 
 ### 3. Using as a command line utility
 
-```
+```javascript
 MetaUtil({
     'start': Number(process.argv[2]),
     'end': Number(process.argv[3]),
