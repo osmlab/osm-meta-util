@@ -25,13 +25,12 @@ There are a few ways of using the utility:
 The files are named in numerical order since February 28th, 2012. They're incremented every minute. You need the file name related to the start and end date. For example, `001181708` refers to [http://planet.osm.org/replication/changesets/001/181/708.osm.gz](http://planet.osm.org/replication/changesets/001/181/708.osm.gz), created on `2015-02-10 20:56`.
 
 ```javascript
-var MetaUtil = require('./osmMetaUtil.js');
-var through = require('through')
+var MetaUtil = require('osm-meta-util');
 // Getting historical metadata, specify a start & end
 var meta = MetaUtil({
      'delay': 1000,
-     'start': 001181708, //2015-02-10 20:56
-     'end': 001181721 //2015-02-10 21:09
+     'start': '001181708', //2015-02-10 20:56
+     'end': '001181721' //2015-02-10 21:09
  }).pipe(process.stdout)
 ```
 
@@ -46,12 +45,13 @@ var meta = MetaUtil().pipe(process.stdout)
 
 ```javascript
 MetaUtil({
-    'start': Number(process.argv[2]),
-    'end': Number(process.argv[3]),
-    'delay': Number(process.argv[4])
+    'start': process.argv[2],
+    'end': process.argv[3],
+    'delay': process.argv[4]
 }).pipe(process.stdout)
 ```
 
+Use it in combination with [jq](https://stedolan.github.io/jq/)
 ```
 node app 001181708 001181721 1000 | jq -c '{user:.user, date: .closed_at}'
 ```
