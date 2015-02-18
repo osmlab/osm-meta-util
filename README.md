@@ -2,18 +2,18 @@
 
 A tool to download and process OSM Metadata. This data contains the most recent annotations around a commit to OSM. Specifically, `commit text`, `username`, `bounding box`, `creation date` and `number of edits`. The data is downloaded from the [planet](http://planet.osm.org/replication/changesets/) repository, which contains minutely changesets to OSM.
 
-Once installed the tool can be used to pipe in compressed XML data between two dates and output it in JSON. OSM Meta Util can also be used in polling mode and continuously download the latest data every minute.  
+Once installed the tool can be used to pipe in compressed XML data between two dates and output it in JSON. OSM Meta Util can also be used in polling mode and continuously download the latest data every minute.
 
 ## Installing
 
-Clone the repo or download it as a zip. `npm` install the dependencies.
+Clone the repo or download it as a zip. `npm install` the dependencies.
 
 ## Running
 
-Require `osmMetaUtil.js` in your node app. 
+Require `osm-meta-util` in your node app.
 
-```javascript
-var MetaUtil = require('./osmMetaUtil.js');
+```
+var MetaUtil = require('osm-meta-util');
 ```
 
 The `MetaUtil` constructor builds a Node Stream, so you can pipe it into stream transformers or into `process.stdout`
@@ -35,7 +35,7 @@ var meta = MetaUtil({
  }).pipe(process.stdout)
 ```
 
-### 2. Continuously 
+### 2. Continuously
 
 ```javascript
 // Live Mode! Updates every minute
