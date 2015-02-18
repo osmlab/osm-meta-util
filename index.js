@@ -15,8 +15,9 @@ function MetaUtil(opts) {
     
     var that = this;
     this.liveMode = (!opts.start && !opts.end && !opts.delay)
-    this.state = opts.start || 0;
-    this.end = opts.end || 1;
+    this.state = Number(opts.start) || 0;
+    this.end = Number(opts.end) || 1;
+    this.diff = this.end - this.state;
     this.delay = (opts.delay || 60000)
     this.initialized = true;
 
@@ -50,13 +51,16 @@ MetaUtil.prototype._read = function() {
 
 MetaUtil.prototype.run = function() {
     var that = this;
-
+    var numProcessed = 0;
     var parserEnd = function(name, attrs) {
         if (name === 'changeset') {
             that.push(new Buffer(JSON.stringify(that._changesetAttrs) + '\n'), 'ascii');
         }
-        if (name === 'osm' && that.state >= that.end) {
-            that.push(null)
+        if (name === 'osm') {
+            that.diff -= 1;
+            if (that.diff < 0) {
+                that.push(null)
+            }
         }
     }
 
@@ -72,7 +76,14 @@ MetaUtil.prototype.run = function() {
     }
 
     var interval = setInterval(function()  {
-        var stateStr = ('00' + that.state.toString() ).split('').reverse().join('');
+
+        //Add padding
+        var stateStr = that.state.toString().split('').reverse()
+        var diff = 9 - stateStr.length
+        for (var i=0; i < diff; i++) { stateStr.push('0') }
+        stateStr = stateStr.join('');
+
+        //Create URL
         var url = '';
         for (var i=0; i<(stateStr.length/3); i++) {
             url += stateStr[i*3] + stateStr[i*3 + 1] + stateStr[i*3 + 2] + '/'
@@ -88,11 +99,10 @@ MetaUtil.prototype.run = function() {
             .pipe(xmlParser)
 
         that.state += 1;
-        if (that.state >= that.end) {
+        if (that.state > that.end) {
             clearInterval(interval);
         }
     }, that.delay);    
 }
 
 module.exports = MetaUtil
-
