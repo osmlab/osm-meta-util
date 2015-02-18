@@ -12,7 +12,7 @@ Clone the repo or download it as a zip. `npm install` the dependencies.
 
 Require `osm-meta-util` in your node app.
 
-```
+```javascript
 var MetaUtil = require('osm-meta-util');
 ```
 
@@ -52,6 +52,7 @@ MetaUtil({
 ```
 
 Use it in combination with [jq](https://stedolan.github.io/jq/)
-```
+
+```sh
 node app 001181708 001181721 1000 | jq -c '{user:.user, date: .closed_at}'
 ```
