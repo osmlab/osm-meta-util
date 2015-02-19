@@ -4,6 +4,8 @@ A tool to download and process OSM Metadata. This data contains the most recent 
 
 Once installed the tool can be used to pipe in compressed XML data between two dates and output it in JSON. OSM Meta Util can also be used in polling mode and continuously download the latest data every minute.
 
+A joint project built by [Development Seed](https://github.com/developmentseed) and the [American Red Cross](https://github.com/americanredcross).
+
 ## Installing
 
 Clone the repo or download it as a zip. `npm install` the dependencies.
