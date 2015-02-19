@@ -15,7 +15,11 @@
     "metadata",
     "changesets"
   ],
-  "author": "Development Seed",
+  "author": ["Development Seed", "American Red Cross"],
+  "contributors": [
+    {"name": "Marc Farra", "email": "marc@developmentseed.org"},
+    {"name": "Alireza", "email": "alireza@developmentseed.org"}
+  ],
   "license": "BSD",
   "bugs": {
     "url": "https://github.com/developmentseed/osm-meta-util/issues"
