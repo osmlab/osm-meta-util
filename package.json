@@ -15,10 +15,10 @@
     "metadata",
     "changesets"
   ],
-  "author": ["Development Seed", "American Red Cross"],
+  "author": "Marc Farra <marc@developmentseed.org>"
   "contributors": [
-    {"name": "Marc Farra", "email": "marc@developmentseed.org"},
-    {"name": "Alireza", "email": "alireza@developmentseed.org"}
+    "Alireza J <alireza@developmentseed.org>"
+    "Dale Kunce <dale.kunce@redcross.org>"
   ],
   "license": "BSD",
   "bugs": {
