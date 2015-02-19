@@ -22,9 +22,9 @@
   ],
   "license": "BSD",
   "bugs": {
-    "url": "https://github.com/developmentseed/osm-meta-util/issues"
+    "url": "https://github.com/osmlab/osm-meta-util/issues"
   },
-  "homepage": "https://github.com/developmentseed/osm-meta-util",
+  "homepage": "https://github.com/osmlab/osm-meta-util",
   "dependencies": {
     "node-expat": "^2.3.5",
     "request": "^2.53.0"
