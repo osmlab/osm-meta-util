@@ -58,7 +58,7 @@ MetaUtil.prototype.run = function() {
         }
         if (name === 'osm') {
             that.diff -= 1;
-            if (that.diff < 0) {
+            if (!that.liveMode && that.diff < 0) {
                 that.push(null)
             }
         }
