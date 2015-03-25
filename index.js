@@ -21,12 +21,9 @@ function MetaUtil(opts) {
     this.delay = (opts.delay || 60000)
     this.initialized = true;
 
-
     this.baseURL = opts.baseURL || 'http://planet.osm.org/replication/changesets'
     this._changesetAttrs = {}
     this.started = false;
-    //start
-
 }
 
 MetaUtil.prototype._read = function() {
@@ -76,7 +73,6 @@ MetaUtil.prototype.run = function() {
     }
 
     var interval = setInterval(function()  {
-
         //Add padding
         var stateStr = that.state.toString().split('').reverse()
         var diff = 9 - stateStr.length
@@ -94,11 +90,21 @@ MetaUtil.prototype.run = function() {
         xmlParser.on('startElement', parserStart)
         xmlParser.on('endElement', parserEnd)
 
-        request.get(that.baseURL + url.split('').reverse().join('') + '.osm.gz')
-            .pipe(zlib.createUnzip())
-            .pipe(xmlParser)
+        //Get YAML state file
+        request.get('http://planet.osm.org/replication/changesets/state.yaml', 
+            function(err, response, body) {
 
-        that.state += 1;
+                //If YAML state is bigger, we can get a new file
+                if (Number(body.substr(body.length - 8)) > that.state) {
+                    request.get(that.baseURL + url.split('').reverse().join('') + '.osm.gz')
+                        .pipe(zlib.createUnzip())
+                        .pipe(xmlParser)
+
+                    that.state += 1;               
+                }
+            }
+        )
+
         if (that.state > that.end) {
             clearInterval(interval);
         }
