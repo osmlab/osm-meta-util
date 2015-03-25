@@ -17,7 +17,7 @@ function MetaUtil(opts) {
     this.liveMode = (!opts.start && !opts.end && !opts.delay)
     this.state = Number(opts.start) || 0;
     this.end = Number(opts.end) || 1;
-    this.diff = this.end - this.state;
+    this.diff = this.end - this.state + 1;
     this.delay = (opts.delay || 60000)
     this.initialized = true;
 
@@ -55,7 +55,12 @@ MetaUtil.prototype.run = function() {
         }
         if (name === 'osm') {
             that.diff -= 1;
-            if (!that.liveMode && that.diff < 0) {
+            if (that.diff > 0) {
+                setTimeout(function() {
+                    next();
+                }, that.delay)
+            }
+            if (!that.liveMode && that.diff == 0) {
                 that.push(null)
             }
         }
@@ -72,7 +77,7 @@ MetaUtil.prototype.run = function() {
         }
     }
 
-    var interval = setInterval(function()  {
+    function next()  {
         //Add padding
         var stateStr = that.state.toString().split('').reverse()
         var diff = 9 - stateStr.length
@@ -104,11 +109,8 @@ MetaUtil.prototype.run = function() {
                 }
             }
         )
-
-        if (that.state > that.end) {
-            clearInterval(interval);
-        }
-    }, that.delay);    
+    }
+    next()
 }
 
 module.exports = MetaUtil
