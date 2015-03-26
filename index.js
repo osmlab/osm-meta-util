@@ -55,7 +55,7 @@ MetaUtil.prototype.run = function() {
         }
         if (name === 'osm') {
             that.diff -= 1;
-            if (that.diff > 0) {
+            if (that.diff > 0 || that.liveMode) {
                 setTimeout(function() {
                     next();
                 }, that.delay)
@@ -100,7 +100,7 @@ MetaUtil.prototype.run = function() {
             function(err, response, body) {
 
                 //If YAML state is bigger, we can get a new file
-                if (Number(body.substr(body.length - 8)) > that.state) {
+                if (Number(body.substr(body.length - 8)) >= that.state) {
                     request.get(that.baseURL + url.split('').reverse().join('') + '.osm.gz')
                         .pipe(zlib.createUnzip())
                         .pipe(xmlParser)
