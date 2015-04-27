@@ -4,7 +4,6 @@ var fs = require('fs');
 var expat = require('node-expat');
 var Readable = require('stream').Readable;
 var util = require('util');
-var through = require('through');
 
 util.inherits(MetaUtil, Readable);
 
