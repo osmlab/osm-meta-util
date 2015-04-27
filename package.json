@@ -1,6 +1,6 @@
 {
   "name": "osm-meta-util",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A tool to download OSM metadata",
   "main": "index.js",
   "scripts": {
